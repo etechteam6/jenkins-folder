@@ -1,13 +1,14 @@
 pipeline {
   agent none
   stages {
-     stage('Checkout') {
-            steps {
-                git credentialsId: 'github-creds', // ID of your credentials
-                url: 'https://github.com/etechteam6/jenkins-folder.git' // URL of your Git repository
-                branch: "master"
-            }
-        }
+    stage('Checkout') {
+      steps {
+        // Correct the git step by using proper syntax
+        git branch: 'master',
+            credentialsId: 'github-creds',
+            url: 'https://github.com/etechteam6/jenkins-folder.git'
+      }
+    }
 
     stage('Back-end') {
       agent {
@@ -17,6 +18,7 @@ pipeline {
         sh 'mvn --version'
       }
     }
+
     stage('Front-end') {
       agent {
         docker { image 'node:16-alpine' }
@@ -25,15 +27,15 @@ pipeline {
         sh 'node --version'
       }
     }
+
     stage('Integration test') {
       agent {
         docker { image 'adoptopenjdk:11-jdk-hotspot' }
       }
-       steps {
+      steps {
         sh 'echo "Running integration tests"'
-        // Example test command, replace with actual test command for your environment
         sh 'java -version'
-        sh 'node --version' // Assuming Node.js is also installed on this image for simplicity
+        sh 'node --version'
       }
     }
   }
