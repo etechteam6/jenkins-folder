@@ -3,12 +3,10 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        // Corrected git step syntax
-        git(
-          credentialsId: 'github-creds',
-          url: 'https://github.com/etechteam6/jenkins-folder.git',
-          branch: 'master'  // Ensure this is the correct branch name
-        )
+        // Correct the git step by using proper syntax
+        git branch: 'master',
+            credentialsId: 'github-creds',
+            url: 'https://github.com/etechteam6/jenkins-folder.git'
       }
     }
 
@@ -36,12 +34,8 @@ pipeline {
       }
       steps {
         sh 'echo "Running integration tests"'
-        /*
-         * Example test commands, replace with actual test commands for your environment.
-         * Ensure all software needed for the tests is installed in the Docker image.
-         */
         sh 'java -version'
-        sh 'node --version'  // Assuming Node.js is also installed on this image for simplicity
+        sh 'node --version'
       }
     }
   }
