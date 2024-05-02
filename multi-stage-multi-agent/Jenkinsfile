@@ -3,17 +3,9 @@ pipeline {
   stages {
      stage('Checkout') {
             steps {
-                // Checkout code from a Git repository
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: '*/master']], // Replace 'main' with your branch if different
-                    userRemoteConfigs: [
-                        [
-                            credentialsId: 'github-creds', // ID of your credentials
-                            url: 'https://github.com/etechteam6/jenkins-folder.git' // URL of your Git repository
-                        ]
-                    ]
-                ])
+                git credentialsId: 'github-creds', // ID of your credentials
+                url: 'https://github.com/etechteam6/jenkins-folder.git' // URL of your Git repository
+                branch: "master"
             }
         }
 
