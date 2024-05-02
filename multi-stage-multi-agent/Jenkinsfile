@@ -1,12 +1,12 @@
 pipeline {
-  agent none
+  agent any
   stages {
     stage('Checkout') {
       steps {
         // Correct the git step by using proper syntax
-        git branch: 'master',
-            credentialsId: 'github-creds',
-            url: 'https://github.com/etechteam6/jenkins-folder.git'
+          git credentialsId: 'github-creds',
+          url: 'https://github.com/etechteam6/jenkins-folder.git',
+          branch: 'master'
       }
     }
 
