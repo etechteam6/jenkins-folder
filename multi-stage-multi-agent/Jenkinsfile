@@ -1,6 +1,22 @@
 pipeline {
   agent none
   stages {
+     stage('Checkout') {
+            steps {
+                // Checkout code from a Git repository
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/master']], // Replace 'main' with your branch if different
+                    userRemoteConfigs: [
+                        [
+                            credentialsId: 'github-creds', // ID of your credentials
+                            url: 'https://github.com/etechteam6/jenkins-folder.git' // URL of your Git repository
+                        ]
+                    ]
+                ])
+            }
+        }
+
     stage('Back-end') {
       agent {
         docker { image 'maven:3.8.1-adoptopenjdk-11' }
