@@ -30,11 +30,10 @@ pipeline {
 
     stage('Integration test') {
       agent {
-        docker { image 'adoptopenjdk:11-jdk-hotspot' }
+        docker { image 'node:16-alpine' }
       }
       steps {
         sh 'echo "Running integration tests"'
-        sh 'java -version'
         sh 'node --version'
       }
     }
