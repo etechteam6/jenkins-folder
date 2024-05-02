@@ -17,5 +17,16 @@ pipeline {
         sh 'node --version'
       }
     }
+    stage('Integration test') {
+      agent {
+        docker { image 'adoptopenjdk:11-jdk-hotspot' }
+      }
+       steps {
+        sh 'echo "Running integration tests"'
+        // Example test command, replace with actual test command for your environment
+        sh 'java -version'
+        sh 'node --version' // Assuming Node.js is also installed on this image for simplicity
+      }
+    }
   }
 }
